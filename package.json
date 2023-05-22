@@ -1,0 +1,24 @@
+{
+  "name": "fastly-purge",
+  "packageManager": "yarn@3.5.0",
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "_eslint": "eslint -c .eslintrc.js --ext .js,.ts src",
+    "lint:check": "yarn run _eslint",
+    "lint:fix": "yarn run _eslint -- --fix",
+    "_prettier": "prettier 'src/**/*.{js,jsx,ts,tsx,html,css,json,yaml,yml}'",
+    "format:fix": "npm run _prettier -- --write",
+    "format:check": "npm run _prettier -- --check",
+    "test": "echo ok"
+  }
+}

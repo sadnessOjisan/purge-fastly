@@ -1,0 +1,13 @@
+name: static-check
+description: Run static check
+runs:
+  using: composite
+  steps:
+    - run: yarn run typecheck
+      shell: bash
+    - run: yarn run lint:check
+      shell: bash
+    - run: yarn run format:check
+      shell: bash
+    - run: yarn run test
+      shell: bash
