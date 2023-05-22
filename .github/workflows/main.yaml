@@ -1,9 +1,11 @@
+name: For staging
+
 on:
   push:
     branches:
       - "main"
 jobs:
-  test:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: checkout

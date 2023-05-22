@@ -1,9 +1,11 @@
+name: For publish
+
 on:
   push:
     tags:
       - "v*"
 jobs:
-  test:
+  check_and_publish:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
