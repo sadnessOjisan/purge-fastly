@@ -31,3 +31,5 @@ jobs:
         run: yarn can-npm-publish
       - name: publish
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
