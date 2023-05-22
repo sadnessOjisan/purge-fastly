@@ -68,6 +68,35 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
       return;
     }
     case "PURGE_A_URL": {
+      let res;
+      try {
+        res = await fetch(`${FASTLY_API_ORIGIN}/purge/${intent.url}`, {
+          headers: {
+            [FASTY_HEADER_KEY]: authToken,
+            [FASTLY_HEADER_SOFT_PURGE_KEY]: "1",
+          },
+        });
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      if (!res.ok) {
+        throw new FastlyError(
+          `HTTP Status Error. status: ${res.status} | json: ${json}`
+        );
+      }
+
+      // FIXME: pluggable logger and flg
+      console.info("success purge");
+
+      return;
     }
     case "PURGE_BY_A_SURROGATE_KEY":
     case "PURGE_BY_MULTI_SURROGATE_KEYS":
