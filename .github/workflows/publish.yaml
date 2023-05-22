@@ -27,6 +27,8 @@ jobs:
         run: yarn install
       - name: static check
         uses: ./.github/actions/static-check
+      - name: build
+        run: yarn run build
       - name: can npm publish
         run: yarn can-npm-publish
       - name: publish
