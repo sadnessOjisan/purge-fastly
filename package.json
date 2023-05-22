@@ -3,6 +3,14 @@
   "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.41.0",
     "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "_eslint": "eslint -c .eslintrc.js --ext .js,.ts src",
+    "lint:check": "yarn run _eslint",
+    "lint:fix": "yarn run _eslint -- --fix"
   }
 }
