@@ -1,9 +1,11 @@
+name: For publish
+
 on:
   push:
     tags:
       - "v*"
 jobs:
-  test:
+  check_and_publish:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -26,6 +28,8 @@ jobs:
       - name: static check
         uses: ./.github/actions/static-check
       - name: can npm publish
-        uses: can-npm-publish
+        run: yarn can-npm-publish
       - name: publish
-        uses: npm publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
