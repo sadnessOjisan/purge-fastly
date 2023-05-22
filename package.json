@@ -1,6 +1,6 @@
 {
   "name": "purge-fastly",
-  "version": "0.0.0-publish-configure-2",
+  "version": "0.0.1",
   "packageManager": "yarn@3.5.0",
   "homepage": "https://github.com/sadnessOjisan/purge-fastly",
   "bugs": "https://github.com/sadnessOjisan/purge-fastly/issues",
@@ -19,6 +19,7 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
+    "build": "yarn tsc",
     "typecheck": "tsc --noEmit",
     "_eslint": "eslint -c .eslintrc.js --ext .js,.ts src",
     "lint:check": "yarn run _eslint",
