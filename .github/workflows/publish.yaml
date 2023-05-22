@@ -28,6 +28,6 @@ jobs:
       - name: static check
         uses: ./.github/actions/static-check
       - name: can npm publish
-        uses: can-npm-publish
+        run: yarn can-npm-publish
       - name: publish
-        uses: npm publish
+        run: npm publish
