@@ -19,6 +19,8 @@ const FASTLY_API_ORIGIN = "https://api.fastly.com";
 
 const FASTY_HEADER_KEY = "Fastly-Key";
 const FASTLY_HEADER_SOFT_PURGE_KEY = "fastly-soft-purge";
+/** This is not typo. This means header key of surroate_key */
+const FASTLY_HEADER_SURROGATE_KEY_KEY = "fastly-soft-purge";
 
 class HttpError extends Error {
   static {
@@ -98,8 +100,77 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
 
       return;
     }
-    case "PURGE_BY_A_SURROGATE_KEY":
-    case "PURGE_BY_MULTI_SURROGATE_KEYS":
+    case "PURGE_BY_A_SURROGATE_KEY": {
+      let res;
+      try {
+        res = await fetch(
+          `${FASTLY_API_ORIGIN}/service/${intent.serviceId}/purge/${intent.surrogateKey}`,
+          {
+            headers: {
+              [FASTY_HEADER_KEY]: authToken,
+              [FASTLY_HEADER_SOFT_PURGE_KEY]: "1",
+            },
+          }
+        );
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      if (!res.ok) {
+        throw new FastlyError(
+          `HTTP Status Error. status: ${res.status} | json: ${json}`
+        );
+      }
+
+      // FIXME: pluggable logger and flg
+      console.info("success purge");
+
+      return;
+    }
+
+    case "PURGE_BY_MULTI_SURROGATE_KEYS": {
+      const surrogateKeys = intent.surrogateKeys.join(" ");
+      let res;
+      try {
+        res = await fetch(
+          `${FASTLY_API_ORIGIN}/service/${intent.serviceId}/purge`,
+          {
+            headers: {
+              [FASTY_HEADER_KEY]: authToken,
+              [FASTLY_HEADER_SOFT_PURGE_KEY]: "1",
+              [FASTLY_HEADER_SURROGATE_KEY_KEY]: surrogateKeys,
+            },
+          }
+        );
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (e) {
+        throw new HttpError("Access error", { cause: e });
+      }
+
+      if (!res.ok) {
+        throw new FastlyError(
+          `HTTP Status Error. status: ${res.status} | json: ${json}`
+        );
+      }
+
+      // FIXME: pluggable logger and flg
+      console.info("success purge");
+
+      return;
+    }
     default:
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
