@@ -1,0 +1,4 @@
+{
+  "name": "fastly-purge",
+  "packageManager": "yarn@3.5.0"
+}
