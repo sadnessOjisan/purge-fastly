@@ -1,4 +1,8 @@
 {
   "name": "fastly-purge",
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@3.5.0",
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.1",
+    "typescript": "^5.0.4"
+  }
 }
