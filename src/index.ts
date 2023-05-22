@@ -55,7 +55,7 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
       try {
         json = await res.json();
       } catch (e) {
-        throw new HttpError("Access error", { cause: e });
+        throw new HttpError("Syntax error", { cause: e });
       }
 
       if (!res.ok) {
@@ -86,7 +86,7 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
       try {
         json = await res.json();
       } catch (e) {
-        throw new HttpError("Access error", { cause: e });
+        throw new HttpError("Syntax error", { cause: e });
       }
 
       if (!res.ok) {
@@ -120,7 +120,7 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
       try {
         json = await res.json();
       } catch (e) {
-        throw new HttpError("Access error", { cause: e });
+        throw new HttpError("Syntax error", { cause: e });
       }
 
       if (!res.ok) {
@@ -157,7 +157,7 @@ export const purge = async (authToken: string, intent: PurgeIntent) => {
       try {
         json = await res.json();
       } catch (e) {
-        throw new HttpError("Access error", { cause: e });
+        throw new HttpError("Syntax error", { cause: e });
       }
 
       if (!res.ok) {
