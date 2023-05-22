@@ -1,7 +1,12 @@
 {
   "name": "purge-fastly",
-  "version": "0.0.0-publish-configure-1",
+  "version": "0.0.0-publish-configure-2",
   "packageManager": "yarn@3.5.0",
+  "homepage": "https://github.com/sadnessOjisan/purge-fastly",
+  "bugs": "https://github.com/sadnessOjisan/purge-fastly/issues",
+  "repository": "https://github.com/sadnessOjisan/purge-fastly",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "latest",
